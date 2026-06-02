@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Android Icon Generator para B4A – by Jhonn</title>
+
+<style>
+    :root {
+        --bg: #ffffff;
+        --text: #222;
+        --subtext: #555;
+        --header-bg: #e9eef7;
+        --header-text: #1b2a47;
+        --accent: #0a84ff;
+        --card-bg: #f7f9fc;
+        --border: #d0d7e2;
+    }
+
+    [data-theme="dark"] {
+        --bg: #0f1115;
+        --text: #e0e0e0;
+        --subtext: #9bb5d1;
+        --header-bg: #1b2a47;
+        --header-text: #ffffff;
+        --accent: #0a84ff;
+        --card-bg: #1a1d23;
+        --border: #2a2f38;
+    }
+
+    body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        line-height: 1.6;
+        transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+        background: var(--header-bg);
+        padding: 40px 20px;
+        text-align: center;
+        border-bottom: 3px solid var(--accent);
+        transition: background 0.3s;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 34px;
+        color: var(--header-text);
+        font-weight: 600;
+    }
+
+    header p {
+        margin-top: 8px;
+        color: var(--subtext);
+        font-size: 18px;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: auto;
+        padding: 25px;
+    }
+
+    h2 {
+        color: var(--accent);
+        border-left: 4px solid var(--accent);
+        padding-left: 10px;
+        margin-top: 40px;
+        font-weight: 500;
+    }
+
+    pre {
+        background: var(--card-bg);
+        padding: 15px;
+        border-radius: 6px;
+        overflow-x: auto;
+        border-left: 4px solid var(--accent);
+        color: var(--text);
+        border: 1px solid var(--border);
+    }
+
+    .btn {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        padding: 12px 22px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 18px;
+        margin-top: 15px;
+        transition: 0.2s;
+    }
+
+    .btn:hover {
+        background: #006edc;
+    }
+
+    img {
+        width: 100%;
+        border-radius: 6px;
+        margin: 15px 0;
+        border: 1px solid var(--border);
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        color: var(--subtext);
+        font-size: 14px;
+        margin-top: 40px;
+        border-top: 1px solid var(--border);
+    }
+
+    /* Toggle */
+    .toggle-container {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    .toggle-btn {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        padding: 8px 14px;
+        border-radius: 20px;
+        cursor: pointer;
+        color: var(--text);
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+    .toggle-btn:hover {
+        background: var(--accent);
+        color: white;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="toggle-container">
+    <button class="toggle-btn" onclick="toggleTheme()">🌗 Cambiar tema</button>
+</div>
+
+<header>
+    <h1>Android Icon Generator para B4A</h1>
+    <p>Herramienta creada por Jhonn</p>
+</header>
+
+<div class="container">
+
+    <h2>Descripción</h2>
+    <p>
+        Android Icon Generator es una herramienta diseñada para desarrolladores B4A que necesitan generar
+        iconos adaptativos modernos de forma rápida y automática. Permite seleccionar la carpeta del proyecto,
+        detectar iconos existentes y generar todos los tamaños necesarios para Android.
+    </p>
+
+    <h2>Características</h2>
+    <ul>
+        <li>Generación automática de iconos adaptativos (foreground, background, round).</li>
+        <li>Detección del color dominante para el fondo.</li>
+        <li>Compatible con proyectos B4A actuales.</li>
+        <li>Salida organizada en la carpeta <code>/icon</code>.</li>
+    </ul>
+
+    <h2>Capturas</h2>
+    <img src="screenshot1.png" alt="Captura 1">
+    <img src="screenshot2.png" alt="Captura 2">
+
+    <h2>Descarga</h2>
+    <p>Puedes descargar la herramienta aquí:</p>
+    <a class="btn" href="SetupIconTool.zip" download>📥 Descargar herramienta</a>
+
+    <h2>Configuración en B4A</h2>
+
+    <h3>Main</h3>
+    <pre>#AdditionalRes: ../icon</pre>
+
+    <h3>Manifest Editor</h3>
+    <pre>
+SetApplicationAttribute(android:icon, "@mipmap/ic_launcher")
+CreateResource(mipmap-anydpi-v26, ic_launcher.xml,
+"&lt;adaptive-icon xmlns:android='http://schemas.android.com/apk/res/android'&gt;
+    &lt;background android:drawable='@mipmap/background'/&gt;
+    &lt;foreground android:drawable='@mipmap/foreground'/&gt;
+&lt;/adaptive-icon&gt;")
+    </pre>
+
+</div>
+
+<footer>
+    © 2026 – Herramienta creada por Jhonn
+</footer>
+
+<script>
+function toggleTheme() {
+    const current = document.documentElement.getAttribute("data-theme");
+    const next = current === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+}
+
+(function() {
+    const saved = localStorage.getItem("theme") || "dark";
+    document.documentElement.setAttribute("data-theme", saved);
+})();
+</script>
+
+</body>
+</html>
