@@ -1,3 +1,3 @@
 # MagusSoft
 MagusSoft
-https://probes.com
+https://magussoft.freehosting.dev
